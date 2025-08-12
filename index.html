@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sysen | Cinematic Video Editor & Motion Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --charcoal: #0E0E0E;
+            --offwhite: #F2F2F2;
+            --cyan: #00A3A3;
+            --softgray: #1C1C1C;
+            --gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--charcoal);
+            color: var(--offwhite);
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(14,14,14,0.8) 0%, rgba(0,0,0,0.9) 100%), 
+                        url('https://kwoska.com/wp-content/uploads/2023/07/Lightworks-Pro-Computer-Setup-Video-Editing-Software-2.webp') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .btn-gradient {
+    background: linear-gradient(90deg, #00BFFF, #FFD700);
+    color: white;
+    border: none;
+    border-radius: 9999px; /* full rounded */
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    box-shadow: 0 4px 10px rgba(0, 191, 255, 0.4);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-gradient:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.6), 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.btn-gradient:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.8), 0 0 25px rgba(255, 215, 0, 0.8);
+}
+
+
+        
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+        
+        
+        .profile-img {
+    border: 3px solid #00FFFF;
+    transition: all 0.3s ease;
+}
+
+.profile-img:hover {
+    box-shadow: 0 0 30px #00FFFF;
+    transform: scale(1.03);
+}
+
+        
+        .portfolio-item {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .service-card {
+            background-color: var(--softgray);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .input-field {
+            background-color: var(--softgray);
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px var(--gold);
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 100px;
+            }
+        }
+        #contact {
+          background-color: #1a1a1a; /* Gris foncé */
+        }
+        .filter-btn.active {
+    background-color: #00FFFF !important;
+    color: #000000 !important;
+  }
+        
+
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-[#0E0E0E]/90 backdrop-blur-md z-50 border-b border-[#1C1C1C]">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-[#00FFFF]">SYSEN</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-[#F2F2F2] hover:text-[#00FFFF] transition">Home</a>
+                    <a href="#about" class="text-[#F2F2F2] hover:text-[#00FFFF] transition">About</a>
+                    <a href="#portfolio" class="text-[#F2F2F2] hover:text-[#00FFFF] transition">Portfolio</a>
+                    <a href="#services" class="text-[#F2F2F2] hover:text-[#00FFFF] transition">Services</a>
+                    <a href="#contact" class="text-[#F2F2F2] hover:text-[#00FFFF] transition">Contact</a>
+                </div>
+                <button class="md:hidden text-[#F2F2F2]">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero relative flex items-center justify-center">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content text-center px-4 z-10 section">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 text-[#F2F2F2]">S Y S E N</h1>
+            <h2 class="text-xl md:text-3xl mb-8 text-[#00FFFF]">Cinematic Video Editor & Motion Designer</h2>
+            <a href="#portfolio" class="btn-gradient">See the Magic</a>
+
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#about" class="text-[#F2F2F2] animate-bounce">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+
+
+
+    <!-- Video Section -->
+<section class="w-full bg-black py-10" data-aos="fade-up">
+    <div class="max-w-6xl mx-auto px-4">
+        <iframe width="100%" height="500" src="https://www.youtube.com/embed/OXorg_dRmp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</section>
+
+<!-- About Section -->
+    <section id="about" class="py-20 bg-[#0E0E0E]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center section">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="relative">
+                        <img src="images/Snapchat-111825750.jpg" alt="Sysen" class="profile-img w-64 h-64 rounded-full object-cover border-4 border-[#00FFFF]">
+
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#00FFFF]">About Me</h2>
+                    <p class="text-lg mb-6">I'm a 22-year-old cinematic video editor specializing in reels, shorts, and motion design. With 5+ years of experience in After Effects and Premiere Pro, I bring precision and style to every project.</p>
+                    <p class="text-lg mb-8">From short-form TikToks to cinematic edits, I focus on clean visuals, dynamic transitions, and storytelling that resonates with audiences.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-[#0d111e] px-4 py-2 rounded-full text-[#00A3A3]">Premiere Pro</span>
+                        <span class="bg-[#0d111e] px-4 py-2 rounded-full text-[#00A3A3]">After Effects</span>
+                        <span class="bg-[#0d111e] px-4 py-2 rounded-full text-[#00A3A3]">Motion Design</span>
+                        <span class="bg-[#0d111e] px-4 py-2 rounded-full text-[#00A3A3]">Green Screen Editing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-[#1C1C1C]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 section">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#00FFFF]">Portfolio Showcase</h2>
+                <p class="text-lg max-w-2xl mx-auto">A selection of my recent work across different platforms and styles</p>
+            </div>
+            
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Portfolio Item 1-->
+                <div class="portfolio-item rounded-lg overflow-hidden relative" data-category="youtube">
+                      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Yd6ksyfVQ1I?autoplay=1&loop=1&mute=1&playlist=Yd6ksyfVQ1I&controls=0&modestbranding=1&showinfo=0" title="YouTube video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <div class="portfolio-overlay">
+                        <h3 class="text-2xl font-bold text-[#00FFFF] mb-2">Fashion Brand Reel</h3>
+                        <p class="text-[#F2F2F2] mb-4">Instagram Reel</p>
+                    </div>
+                </div>  
+                
+
+                 <!-- Portfolio Item 2 -->
+                <div class="portfolio-item rounded-lg overflow-hidden relative" data-category="instagram">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vufuRsqR5II?autoplay=1&loop=1&mute=1&playlist=vufuRsqR5II&controls=0&modestbranding=1&showinfo=0" title="YouTube video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <div class="portfolio-overlay">
+                        <h3 class="text-2xl font-bold text-[#00FFFF] mb-2">Event Highlights</h3>
+                        <p class="text-[#F2F2F2] mb-4">YouTube Video</p>
+                    </div>
+                </div>
+                
+
+                 <!-- Portfolio Item 3 -->
+                <div class="portfolio-item rounded-lg overflow-hidden relative" data-category="instagram">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/3qlsIbeny1M?autoplay=1&loop=1&mute=1&playlist=3qlsIbeny1M&controls=0&modestbranding=1&showinfo=0" title="YouTube video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <div class="portfolio-overlay">
+                        <h3 class="text-2xl font-bold text-[#00FFFF] mb-2">Corporate Presentation</h3>
+                        <p class="text-[#F2F2F2] mb-4">Green Screen Edit</p>
+                    </div>
+                </div>
+
+
+                 <!-- Portfolio Item 4 -->
+                <div class="portfolio-item rounded-lg overflow-hidden relative" data-category="instagram">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/PKRE9Ux4vps?autoplay=1&loop=1&mute=1&playlist=PKRE9Ux4vps&controls=0&modestbranding=1&showinfo=0" title="YouTube video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <div class="portfolio-overlay">
+                        <h3 class="text-2xl font-bold text-[#00FFFF] mb-2">Clinic AD</h3>
+                        <p class="text-[#F2F2F2] mb-4">Instagram Reel</p>
+                    </div>
+                </div>
+                
+                 <!-- Portfolio Item 5 -->
+                <div class="portfolio-item rounded-lg overflow-hidden relative" data-category="youtube">
+                      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/O2ChcR1AEio?autoplay=1&loop=1&mute=1&playlist=O2ChcR1AEio&controls=0&modestbranding=1&showinfo=0" title="YouTube video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <div class="portfolio-overlay">
+                        <h3 class="text-2xl font-bold text-[#00FFFF] mb-2">Challenge Participation</h3>
+                        <p class="text-[#F2F2F2] mb-4">YouTube Video</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item rounded-lg overflow-hidden relative" data-category="greenscreen">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/7wHtTzAfFPo?autoplay=1&loop=1&mute=1&playlist=7wHtTzAfFPo&controls=0&modestbranding=1&showinfo=0" title="YouTube video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <div class="portfolio-overlay">
+                        <h3 class="text-2xl font-bold text-[#00FFFF] mb-2">Commercial Editing</h3>
+                        <p class="text-[#F2F2F2] mb-4">Green Screen Edit</p>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+            <!-- Instagram Reels Section -->
+            <div class="portfolio-section-instagram flex flex-col items-center hidden">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 text-center">Instagram Reels</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center w-full">
+                    <div class="portfolio-item flex justify-center items-center h-[60px] relative group" data-category="Instagram Reels">
+                        <video class="max-w-full max-h-full w-[84px] h-[60px] rounded-lg shadow-lg object-contain mx-auto" autoplay muted loop playsinline loading="lazy" style="background:#000;"></video>
+                            <source src="https://drive.google.com/file/d/1rsCspTkdCLDdmpT3ZZU2qrDDbdAJEofT/view?usp=drive_link" type="video/mp4">
+                        </video>
+                        <div class="portfolio-overlay">
+                            <span class="text-base font-semibold text-[#FFD700]">Instagram Reel</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item flex justify-center items-center h-[60px] relative group" data-category="Instagram Reels">
+                        <video class="max-w-full max-h-full w-[84px] h-[60px] rounded-lg shadow-lg object-contain mx-auto" autoplay muted loop playsinline loading="lazy" style="background:#000;"></video>
+                            <source src="https://drive.google.com/file/d/1w909i4Bg_JGrjHood4efaQL_Cvptdxvc/view?usp=drive_link" type="video/mp4">
+                        </video>
+                        <div class="portfolio-overlay">
+                            <span class="text-base font-semibold text-[#FFD700]">Instagram Reel</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item flex justify-center items-center h-[60px] relative group" data-category="Instagram Reels">
+                        <video class="max-w-full max-h-full w-[84px] h-[60px] rounded-lg shadow-lg object-contain mx-auto" autoplay muted loop playsinline loading="lazy" style="background:#000;"></video>
+                            <source src="https://drive.google.com/file/d/1KTJ_qGwCqHFHqw3lr7dBPWBSXAhQvUlD/view?usp=drive_link" type="video/mp4">
+                        </video>
+                        <div class="portfolio-overlay">
+                            <span class="text-base font-semibold text-[#FFD700]">Instagram Reel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- YouTube Videos Section -->
+            <div class="portfolio-section-youtube flex flex-col items-center hidden">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 text-center">YouTube Videos</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center w-full">
+                    <div class="portfolio-item flex justify-center items-center h-[60px] relative group" data-category="YouTube Videos">
+                        <video class="max-w-full max-h-full w-[84px] h-[60px] rounded-lg shadow-lg object-contain mx-auto" autoplay muted loop playsinline loading="lazy" style="background:#000;"></video>
+                            <source src="https://drive.google.com/file/d/1EmgO22HOMfENZov3V458MhT956uyRMBT/view?usp=drive_link" type="video/mp4">
+                        </video>
+                        <div class="portfolio-overlay">
+                            <span class="text-base font-semibold text-[#FFD700]">YouTube Video</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item flex justify-center items-center h-[60px] relative group" data-category="YouTube Videos"></div>
+                        <video class="max-w-full max-h-full w-[84px] h-[60px] rounded-lg shadow-lg object-contain mx-auto" autoplay muted loop playsinline loading="lazy" style="background:#000;"></video>
+                            <source src="https://drive.google.com/file/d/1s2kR2pUOAaoFxXU9G2wexTBmtI9Dj_X3/view?usp=drive_link" type="video/mp4">
+                        </video>
+                        <div class="portfolio-overlay">
+                            <span class="text-base font-semibold text-[#FFD700]">YouTube Video</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Green Screen Section -->
+            <div class="portfolio-section-greenscreen flex flex-col items-center hidden">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 text-center">Green Screen Edits</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center w-full">
+                    <div class="portfolio-item flex justify-center items-center h-[60px] relative group" data-category="greenscreen">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/3qlsIbeny1M?autoplay=1&loop=1&mute=1&playlist=3qlsIbeny1M&controls=0&modestbranding=1&showinfo=0" title="YouTube video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        <div class="portfolio-overlay">
+                            <span class="text-base font-semibold text-[#FFD700]">Green Screen Edit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Portfolio filter logic for section display
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const allSection = document.querySelector('.portfolio-section-all');
+            const instaSection = document.querySelector('.portfolio-section-instagram');
+            const ytSection = document.querySelector('.portfolio-section-youtube');
+            const greenSection = document.querySelector('.portfolio-section-greenscreen');
+
+            function showSection(section) {
+                allSection.classList.add('hidden');
+                instaSection.classList.add('hidden');
+                ytSection.classList.add('hidden');
+                greenSection.classList.add('hidden');
+                section.classList.remove('hidden');
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.getAttribute('data-filter');
+                    if (filter === 'all') showSection(allSection);
+                    else if (filter === 'Instagram Reels') showSection(instaSection);
+                    else if (filter === 'YouTube Videos') showSection(ytSection);
+                    else if (filter === 'greenscreen') showSection(greenSection);
+                });
+            });
+
+            // Show all by default
+            showSection(allSection);
+        });
+    </script>
+</section>
+<section id="services" class="py-20 bg-[#0E0E0E]">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16 section">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#00FFFF]">My Services</h2>
+            <p class="text-lg max-w-2xl mx-auto">Comprehensive video production services tailored to your needs</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service Cards -->
+            <div class="service-card p-8 rounded-lg bg-[#0D111E]">
+                <div class="text-[#00A3A3] text-4xl mb-4">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-[#00FFFF]">Video Editing</h3>
+                <p class="text-[#F2F2F2]">Professional editing for all types of content including YouTube videos, commercials, and social media content with color grading and audio mixing.</p>
+            </div>
+
+            <div class="service-card p-8 rounded-lg bg-[#0D111E]">
+                <div class="text-[#00A3A3] text-4xl mb-4">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-[#00FFFF]">Motion Graphics</h3>
+                <p class="text-[#F2F2F2]">Dynamic animations, kinetic typography, and visual effects to make your content stand out and engage your audience.</p>
+            </div>
+
+            <div class="service-card p-8 rounded-lg bg-[#0D111E]">
+                <div class="text-[#00A3A3] text-4xl mb-4">
+                    <i class="fas fa-ad"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-[#00FFFF]">Social Media Content</h3>
+                <p class="text-[#F2F2F2]">Optimized content creation for Instagram Reels, TikTok, and other platforms with attention-grabbing edits and trending formats.</p>
+            </div>
+
+            <div class="service-card p-8 rounded-lg bg-[#0D111E]">
+                <div class="text-[#00A3A3] text-4xl mb-4">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-[#00FFFF]">Green Screen Editing</h3>
+                <p class="text-[#F2F2F2]">Professional chroma key compositing with custom backgrounds and seamless integration for presentations and educational content.</p>
+            </div>
+
+            <div class="service-card p-8 rounded-lg bg-[#0D111E]">
+                <div class="text-[#00A3A3] text-4xl mb-4">
+                    <i class="fas fa-photo-video"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-[#00FFFF]">Color Grading</h3>
+                <p class="text-[#F2F2F2]">Cinematic color correction and grading to give your footage a professional, cohesive look that matches your brand aesthetic.</p>
+            </div>
+
+            <div class="service-card p-8 rounded-lg bg-[#0D111E]">
+                <div class="text-[#00A3A3] text-4xl mb-4">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-[#00FFFF]">Audio Enhancement</h3>
+                <p class="text-[#F2F2F2]">Professional audio cleanup, mixing, and mastering to ensure crystal clear dialogue and balanced sound design.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact" 
+  class="py-16 text-white bg-cover bg-center relative" 
+  style="background-image: url('images/télécharger.jfif');">
+  
+  <!-- Overlay sombre -->
+  <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+
+  <div class="container mx-auto px-4 flex justify-center relative z-10">
+    <form
+      action="https://formspree.io/f/mnqewzqd"
+      method="POST"
+      class="w-full max-w-md bg-[#0d111e] p-6 rounded-lg shadow-lg space-y-4"
+    >
+      <h2 class="text-2xl font-bold text-center text-[#00FFFF] mb-2">Contact Me</h2>
+      <p class="text-center text-gray-300 mb-4">Got a question or want to work together?</p>
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+        class="w-full px-4 py-2 bg-[#1a1f2e] border border-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      />
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Your Email"
+        required
+        class="w-full px-4 py-2 bg-[#1a1f2e] border border-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      />
+
+      <textarea
+        name="message"
+        rows="4"
+        placeholder="Your Message"
+        required
+        class="w-full px-4 py-2 bg-[#1a1f2e] border border-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      ></textarea>
+
+      <div class="text-center">
+        <button
+          type="submit"
+          class="bg-cyan-300 hover:bg-cyan-200 text-black font-semibold px-6 py-2 rounded transition"
+        >
+          Send
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-[#0E0E0E] py-12 border-t border-[#1C1C1C]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold text-[#00FFFF]">SYSEN</h3>
+                    <p class="text-[#F2F2F2] mt-2">Zéralda, Algiers, Algeria</p>
+                    <p class="text-[#F2F2F2] mt-2">Customer Service: +213 799 836 730</p>
+                    <p class="text-[#F2F2F2] mt-2">Sales Inquiries: sysenpro@gmail.com</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/in/mohamed-ouhib-88a9bb379" class="social-icon text-2xl text-[#F2F2F2] hover:text-[#FFD700]">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:sysenpro@gmail.com" class="social-icon text-2xl text-[#F2F2F2] hover:text-[#FFD700]">
+                       <i class="fas fa-envelope"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="border-t border-[#1C1C1C] mt-8 pt-8 text-center text-[#F2F2F2]">
+                <p>&copy; 2025 Sysen. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script>
+        // Create particles for hero section
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2px and 5px
+                const size = Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration between 10s and 20s
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Portfolio filtering
+        function setupPortfolioFilter() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Pause videos outside viewport for performance
+        function setupVideoViewportPause() {
+            const videos = document.querySelectorAll('video[autoplay]');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.play();
+                        } else {
+                            entry.target.pause();
+                        }
+                    });
+                }, { threshold: 0.25 });
+                videos.forEach(video => observer.observe(video));
+            }
+        }
+        
+        // Scroll animation for sections
+        function setupScrollAnimation() {
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+
+        function setupMobileMenu() {
+            // Use a robust selector for the mobile menu button
+            const menuButton = document.querySelector('button.md\\:hidden') || document.querySelector('button.text-[#F2F2F2]');
+            const navMenu = document.querySelector('.md\\:flex');
+            const navLinks = document.querySelectorAll('nav a');
+
+            // Ensure menuButton and navMenu exist
+            if (!menuButton || !navMenu) return;
+
+            menuButton.addEventListener('click', () => {
+                // Toggle the mobile menu visibility
+                navMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked (on mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) {
+                        navMenu.classList.add('hidden');
+                    }
+                });
+            });
+        }
+        // Group UI setup functions
+        function initializeUI() {
+            createParticles();
+            setupPortfolioFilter();
+            setupScrollAnimation();
+            setupSmoothScrolling();
+            setupMobileMenu();
+        }
+        
+        // Initialize all functions when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            setupPortfolioFilter();
+            setupScrollAnimation();
+            setupSmoothScrolling();
+            setupMobileMenu();
+            setupVideoViewportPause();
+        });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
